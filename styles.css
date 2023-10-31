@@ -1,0 +1,19 @@
+body{
+    background-color: black;
+    overflow-x: hidden;
+}
+
+h1{
+    text-align: center;
+    color: aliceblue;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#tempRead{
+    color:aliceblue;
+}
+
+
+#humRead{
+    color:aliceblue;
+}
