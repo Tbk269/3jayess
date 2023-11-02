@@ -198,7 +198,7 @@
 				0.08461538702249527
 			],
 			"translation":[
-				4.325430870056152,
+				4.296534538269043,
 				2.450000047683716,
 				-4.192323207855225
 			]
@@ -218,7 +218,7 @@
 				0.08461538702249527
 			],
 			"translation":[
-				4.32598876953125,
+				4.297092437744141,
 				2.450000047683716,
 				3.80078387260437
 			]
@@ -347,6 +347,20 @@
 	"materials":[
 		{
 			"doubleSided":true,
+			"name":"floor",
+			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0.02117452211678028,
+					0.02117452211678028,
+					0.02117452211678028,
+					1
+				],
+				"metallicFactor":0,
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"doubleSided":true,
 			"name":"Wall",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
@@ -398,7 +412,8 @@
 						"NORMAL":1,
 						"TEXCOORD_0":2
 					},
-					"indices":3
+					"indices":3,
+					"material":0
 				}
 			]
 		},
@@ -464,7 +479,7 @@
 						"TEXCOORD_0":19
 					},
 					"indices":20,
-					"material":0
+					"material":1
 				}
 			]
 		},
@@ -478,7 +493,7 @@
 						"TEXCOORD_0":23
 					},
 					"indices":20,
-					"material":0
+					"material":1
 				}
 			]
 		},
@@ -492,7 +507,7 @@
 						"TEXCOORD_0":26
 					},
 					"indices":20,
-					"material":0
+					"material":1
 				}
 			]
 		},
@@ -584,7 +599,7 @@
 						"TEXCOORD_0":48
 					},
 					"indices":49,
-					"material":1
+					"material":2
 				}
 			]
 		},
@@ -598,7 +613,7 @@
 						"TEXCOORD_0":52
 					},
 					"indices":20,
-					"material":0
+					"material":1
 				}
 			]
 		},
@@ -612,7 +627,7 @@
 						"TEXCOORD_0":55
 					},
 					"indices":20,
-					"material":0
+					"material":1
 				}
 			]
 		},
@@ -626,7 +641,7 @@
 						"TEXCOORD_0":58
 					},
 					"indices":20,
-					"material":0
+					"material":1
 				}
 			]
 		},
@@ -640,7 +655,7 @@
 						"TEXCOORD_0":61
 					},
 					"indices":20,
-					"material":0
+					"material":1
 				}
 			]
 		},
@@ -654,7 +669,7 @@
 						"TEXCOORD_0":64
 					},
 					"indices":20,
-					"material":0
+					"material":1
 				}
 			]
 		},
@@ -681,7 +696,7 @@
 						"TEXCOORD_0":70
 					},
 					"indices":71,
-					"material":2
+					"material":3
 				}
 			]
 		},
@@ -695,7 +710,7 @@
 						"TEXCOORD_0":74
 					},
 					"indices":71,
-					"material":2
+					"material":3
 				}
 			]
 		},
@@ -709,7 +724,7 @@
 						"TEXCOORD_0":77
 					},
 					"indices":71,
-					"material":2
+					"material":3
 				}
 			]
 		},
@@ -723,7 +738,7 @@
 						"TEXCOORD_0":80
 					},
 					"indices":71,
-					"material":2
+					"material":3
 				}
 			]
 		}

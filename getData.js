@@ -6,7 +6,7 @@ fetch('https://api.data.gov.sg/v1/environment/air-temperature')
         return res.json();
     })
     .then(data => {
-        const temperature = data.items[0].readings[0].value; // Extracting specific temperature value from the fetched data
+        const temperature = data.items[0].readings[2].value; // Extracting specific temperature value from the fetched data
         tDisplay.textContent = temperature; // Update the content of #tempRead element
     })
     .catch(error => console.log(error));
@@ -16,7 +16,7 @@ fetch('https://api.data.gov.sg/v1/environment/relative-humidity')
         return res.json();
     })
     .then(data => {
-        const humidity = data.items[0].readings[0].value; // Extracting specific humidity value from the fetched data
+        const humidity = data.items[0].readings[2].value; // Extracting specific humidity value from the fetched data
         hDisplay.textContent = humidity; // Update the content of #humRead element
     })
     .catch(error => console.log(error));
