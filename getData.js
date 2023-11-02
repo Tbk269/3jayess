@@ -1,22 +1,38 @@
 const tDisplay = document.querySelector("#tempRead");
 const hDisplay = document.querySelector("#humRead");
 
+const temperatureData = [];
 fetch('https://api.data.gov.sg/v1/environment/air-temperature')
-    .then(res => {
-        return res.json();
-    })
+    .then(res => res.json())
     .then(data => {
-        const temperature = data.items[0].readings[2].value; // Extracting specific temperature value from the fetched data
-        tDisplay.textContent = temperature; // Update the content of #tempRead element
+        const readings = data.items[0].readings;
+        readings.forEach(reading => {
+            temperatureData.push({ input: parseFloat(reading.value), output: { temperature: parseFloat(reading.value) } });
+        });
+    })
+    .then(() => {
+        const net = new brain.NeuralNetwork();
+        net.train(temperatureData);
+
+        const predictedTemperature = net.run(temperatureData);
+        tDisplay.textContent = predictedTemperature;
     })
     .catch(error => console.log(error));
 
+const humidityData = [];
 fetch('https://api.data.gov.sg/v1/environment/relative-humidity')
-    .then(res => {
-        return res.json();
-    })
+    .then(res => res.json())
     .then(data => {
-        const humidity = data.items[0].readings[2].value; // Extracting specific humidity value from the fetched data
-        hDisplay.textContent = humidity; // Update the content of #humRead element
+        const readings = data.items[0].readings;
+        readings.forEach(reading => {
+            humidityData.push({ input: parseFloat(reading.value), output: { humidity: parseFloat(reading.value) } });
+        });
+    })
+    .then(() => {
+        const net = new brain.NeuralNetwork();
+        net.train(humidityData);
+
+        const predictedHumidity = net.run(humidityData);
+        hDisplay.textContent = predictedHumidity;
     })
     .catch(error => console.log(error));
