@@ -1,8 +1,7 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
-
+import { CSS2DRenderer , CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 const renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 
@@ -13,6 +12,11 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 document.body.appendChild(renderer.domElement);
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(window.innerWidth, window.innerHeight);
+labelRenderer.domElement.style.position = 'absolute';
+labelRenderer.domElement.style.top = '0px';
+document.body.appendChild( labelRenderer.domElement );
 
 const scene = new THREE.Scene();
 
@@ -31,6 +35,8 @@ controls.target = new THREE.Vector3(0, 1, 0);
 controls.update();
 
 const light = new THREE.DirectionalLight( 0xfffffff, 0.5 );
+light.shadow.camera.near = 100;
+light.shadow.camera.far = 1000;
 light.castShadow = true;
 scene.add(light);
 
@@ -45,6 +51,7 @@ loader.load( 'room/digitalTwinRoom.gltf', function ( gltf ) {
 function animate() {
   requestAnimationFrame(animate);
   controls.update();
+  //labelRenderer.render(scene,camera);
   renderer.render(scene, camera);
 }
 
