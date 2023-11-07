@@ -1,4 +1,4 @@
-const tDisplay = document.querySelector("#tempRead");
+const tDisplay = document.getElementsByClassName("tempRead");
 const hDisplay = document.querySelector("#humRead");
 
 fetch('https://api.data.gov.sg/v1/environment/air-temperature')
