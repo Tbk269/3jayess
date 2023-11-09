@@ -3,6 +3,13 @@ body{
     overflow-x: hidden;
 }
 
+body svg{
+    display: inline-block;
+    position: absolute;
+    top: 100; 
+    left: 100;
+}
+
 h1{
     text-align: center;
     color: aliceblue;

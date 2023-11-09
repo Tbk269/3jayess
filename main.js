@@ -100,3 +100,16 @@ fetch('https://api.data.gov.sg/v1/environment/relative-humidity')
         hDisplay.textContent = humidityText.slice(0, -2); // Update the content of #humRead element
     })
     .catch(error => console.log(error));
+
+    const svgElement = document.getElementById("svgIcon");
+    const tooltip = document.getElementById("tooltip");
+    
+    svgElement.addEventListener("mouseover", function() {
+        tooltip.style.visibility = "visible";
+        tooltip.style.opacity = 1;
+    });
+    
+    svgElement.addEventListener("mouseout", function() {
+        tooltip.style.visibility = "hidden";
+        tooltip.style.opacity = 0;
+    });
