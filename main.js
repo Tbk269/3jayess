@@ -39,10 +39,11 @@ const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 const cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
 cube.position.y = 2;
+cube.position.z = 3;
+cube.position.x = -0.5;
 
-const el = document.createElement('h1')
-el.innerHTML = 'blank'
-el.className = 'tempRead'
+const el = document.createElement('h5')
+el.innerHTML = ''
 const objectCSS = new CSS2DObject(el)
 objectCSS.position.set(0, 0, 0)
 cube.add(objectCSS)
@@ -70,7 +71,6 @@ function animate() {
 
 animate();
 
-const tDisplay = document.querySelector("#tempRead");
 const hDisplay = document.querySelector("#humRead");
 
 fetch('https://api.data.gov.sg/v1/environment/air-temperature')
@@ -78,12 +78,10 @@ fetch('https://api.data.gov.sg/v1/environment/air-temperature')
         return res.json();
     })
     .then(data => {
-        const readings = data.items[0].readings; // Assuming readings is an array of temperature readings
-        let temperatureText = "Temperatures: ";
-        readings.forEach(reading => {
-            temperatureText += `${reading.value}, `;
-        });
-        tDisplay.textContent = temperatureText.slice(0, -2); // Update the content of #tempRead element
+        el.textContent += "Temperature: \n";
+        el.textContent += " ";
+        const temperature = data.items[0].readings[2].value; // Extracting specific temperature value from the fetched data
+        el.textContent += temperature; // Update the content of #tempRead element
     })
     .catch(error => console.log(error));
 
@@ -92,24 +90,9 @@ fetch('https://api.data.gov.sg/v1/environment/relative-humidity')
         return res.json();
     })
     .then(data => {
-        const readings = data.items[0].readings; // Assuming readings is an array of humidity readings
-        let humidityText = "Humidities: ";
-        readings.forEach(reading => {
-            humidityText += `${reading.value}, `;
-        });
-        hDisplay.textContent = humidityText.slice(0, -2); // Update the content of #humRead element
+        el.textContent += "Humidity: \n";
+        el.textContent += " ";
+        const humidity = data.items[0].readings[2].value; // Extracting specific temperature value from the fetched data
+        el.textContent += humidity; // Update the content of #tempRead element
     })
     .catch(error => console.log(error));
-
-    const svgElement = document.getElementById("svgIcon");
-    const tooltip = document.getElementById("tooltip");
-    
-    svgElement.addEventListener("mouseover", function() {
-        tooltip.style.visibility = "visible";
-        tooltip.style.opacity = 1;
-    });
-    
-    svgElement.addEventListener("mouseout", function() {
-        tooltip.style.visibility = "hidden";
-        tooltip.style.opacity = 0;
-    });
