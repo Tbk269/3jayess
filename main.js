@@ -34,19 +34,20 @@ controls.autoRotate = true;
 controls.target = new THREE.Vector3(0, 1, 0);
 controls.update();
 
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
-cube.position.y = 2;
-cube.position.z = 3;
-cube.position.x = -0.5;
+const geometry = new THREE.BoxGeometry( 1.05, 2, 1.6 );
+const material = new THREE.MeshBasicMaterial( { color: 0xf } );
+material.opacity= 0.5;
+const rack1 = new THREE.Mesh( geometry, material );
+scene.add(rack1);
+rack1.position.y = 2.5;
+rack1.position.z = 3.65;
+rack1.position.x = -1.08;
 
 const el = document.createElement('h5')
 el.innerHTML = ''
 const objectCSS = new CSS2DObject(el)
 objectCSS.position.set(0, 0, 0)
-cube.add(objectCSS)
+rack1.add(objectCSS)
 document.body.appendChild(el);
 
 const light = new THREE.DirectionalLight( 0xfffffff, 0.5 );
