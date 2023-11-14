@@ -36,7 +36,8 @@ controls.update();
 
 const geometry = new THREE.BoxGeometry( 1.05, 2, 1.6 );
 const material = new THREE.MeshBasicMaterial( { color: 0xf } );
-material.opacity= 0.5;
+material.transparent = true;
+material.opacity = 0.5;
 
 const rack1 = new THREE.Mesh( geometry, material );
 scene.add(rack1);
@@ -102,6 +103,17 @@ function animate() {
   labelRenderer.render(scene,camera);
   renderer.render(scene, camera);
 }
+
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+
+window.addEventListener('click',event =>{
+	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+    raycaster.setFromCamera( pointer, camera );
+    const intersects = raycaster.intersectObjects( scene.children );
+})
 
 animate();
 fetch('https://api.data.gov.sg/v1/environment/air-temperature')
