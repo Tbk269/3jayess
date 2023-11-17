@@ -104,6 +104,13 @@ function animate() {
   renderer.render(scene, camera);
 }
 
+window.addEventListener('resize', function(){
+    camera.aspect = window.innerWidth / this.window.innerHeight;
+    camera.updateProjectionMatrix;
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.setSize(this.window.innerWidth, this.window.innerHeight);
+})
+
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 
