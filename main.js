@@ -37,52 +37,34 @@ controls.update();
 const geometry = new THREE.BoxGeometry( 1.05, 2, 1.6 );
 const material = new THREE.MeshBasicMaterial( { color: 0xf } );
 material.transparent = true;
-material.opacity = 0.5;
+material.opacity = 0.7;
 
-const rack1 = new THREE.Mesh( geometry, material );
+function createRack(name, x , y ,z){
+    const geo = new THREE.Mesh( geometry, material );
+    scene.add(geo);
+    geo.position.set(x,y,z);
+    geo.name = name;
+    return geo;
+}
+
+const rack1 = createRack('rack1', -1.08 , 2.5 ,3.68);
 scene.add(rack1);
-rack1.position.y = 2.5;
-rack1.position.z = 3.68;
-rack1.position.x = -1.08;
 
-const rack2 = new THREE.Mesh( geometry, material );
+const rack2 = createRack('rack2', -1.08 , 2.5 ,5.25);
 scene.add(rack2);
-rack2.position.y = 2.5;
-rack2.position.z = 5.25;
-rack2.position.x = -1.08;
 
-const rack3 = new THREE.Mesh( geometry, material );
+const rack3 = createRack('rack3', -2 , 2.5 ,3.68);
 scene.add(rack3);
-rack3.position.y = 2.5;
-rack3.position.z = 3.68;
-rack3.position.x = -2;
 
-const rack4 = new THREE.Mesh( geometry, material );
+const rack4 = createRack('rack4', -2 , 2.5 ,5.25);
 scene.add(rack4);
-rack4.position.y = 2.5;
-rack4.position.z = 5.25;
-rack4.position.x = -2;
 
-const el1 = document.createElement('h5');
-const el2 = document.createElement('h5');
-const el3 = document.createElement('h5');
-const el4 = document.createElement('h5');
-const objectCSS1 = new CSS2DObject(el1);
-const objectCSS2 = new CSS2DObject(el2);
-const objectCSS3 = new CSS2DObject(el3);
-const objectCSS4 = new CSS2DObject(el4);
-objectCSS1.position.set(0, 0, 0);
-objectCSS2.position.set(0, 0, 0);
-objectCSS3.position.set(0, 0, 0);
-objectCSS4.position.set(0, 0, 0);
-rack1.add(objectCSS1);
-rack2.add(objectCSS2);
-rack3.add(objectCSS3);
-rack4.add(objectCSS4);
-document.body.appendChild(el1);
-document.body.appendChild(el2);
-document.body.appendChild(el3);
-document.body.appendChild(el4);
+const el = document.createElement('h5');
+el.name = 'tooltip';
+const container = document.createElement('div');
+container.appendChild(el);
+const reading = new CSS2DObject(container);
+rack1.add(reading);
 
 const light = new THREE.DirectionalLight( 0xfffffff, 0.5 );
 light.shadow.camera.near = 100;
@@ -114,31 +96,68 @@ window.addEventListener('resize', function(){
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 
+window.addEventListener('mousemove', function(event){
+    pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+    raycaster.setFromCamera( pointer, camera );
+	const intersects = raycaster.intersectObjects( scene.children );
+    const rack = intersects[0].object.name;
+    if(intersects.length>0){
+        switch(rack){
+            case 'rack1':
+                el.className = 'tooltip show';
+                reading.position.set(0,0,0);
+                break;
+            case 'rack2':
+                el.className = 'tooltip show';
+                reading.position.set(0,0,1.5);
+                break;
+            case 'rack3':
+                el.className = 'tooltip show';
+                reading.position.set(-1.5,0,0);
+                break;
+            case 'rack4':
+                el.className = 'tooltip show';
+                reading.position.set(-1.5,0,1.5);
+                break;
+            
+            default:
+                break;
+        }
+    } else {
+        el.className = 'tooltip hide';
+    }
+})
 animate();
 fetch('https://api.data.gov.sg/v1/environment/air-temperature')
     .then(res => {
         return res.json();
     })
     .then(data => {
-        el1.textContent += "T1: \n";
-        el1.textContent += " ";
-        const temperature1 = data.items[0].readings[0].value;
-        el1.textContent += temperature1;
-
-        el2.textContent += "T2: \n";
-        el2.textContent += " ";
-        const temperature2 = data.items[0].readings[1].value;
-        el2.textContent += temperature2;
-
-        el3.textContent += "T3: \n";
-        el3.textContent += " ";
-        const temperature3 = data.items[0].readings[2].value;
-        el3.textContent += temperature3;
-
-        el4.textContent += "T4: \n";
-        el4.textContent += " ";
-        const temperature4 = data.items[0].readings[3].value;
-        el4.textContent += temperature4;
+        el.textContent += "T: \n";
+        el.textContent += " ";
+        const temperature1 = 0;
+        switch(rack){
+            case 'rack1':
+                temperature1 = data.items[0].readings[0].value;
+                el.textContent += temperature1;
+                break;
+            case 'rack2':
+                temperature1 = data.items[0].readings[1].value;
+                el.textContent += temperature1;
+                break;
+            case 'rack3':
+                temperature1 = data.items[0].readings[2].value;
+                el.textContent += temperature1;
+                break;
+            case 'rack4':
+                temperature1 = data.items[0].readings[3].value;
+                el.textContent += temperature1;
+                break;
+            
+            default:
+                break;
+        }
     })
     .catch(error => console.log(error));
 
@@ -147,24 +166,29 @@ fetch('https://api.data.gov.sg/v1/environment/relative-humidity')
         return res.json();
     })
     .then(data => {
-        el1.textContent += "H1: \n";
-        el1.textContent += " ";
-        const humidity1 = data.items[0].readings[0].value;
-        el1.textContent += humidity1;
-
-        el2.textContent += "H2: \n";
-        el2.textContent += " ";
-        const humidity2 = data.items[0].readings[1].value;
-        el2.textContent += humidity2;
-
-        el3.textContent += "H3: \n";
-        el3.textContent += " ";
-        const humidity3 = data.items[0].readings[2].value;
-        el3.textContent += humidity3;
-
-        el4.textContent += "H4: \n";
-        el4.textContent += " ";
-        const humidity4 = data.items[0].readings[3].value;
-        el4.textContent += humidity4;
+        el.textContent += "H: \n";
+        el.textContent += " ";
+        const humidity1 = 0;
+        switch(intersects[0].object.name){
+            case 'rack1':
+                humidity1 = data.items[0].readings[0].value;
+                el.textContent += humidity1;
+                break;
+            case 'rack2':
+                humidity1 = data.items[0].readings[1].value;
+                el.textContent += humidity1;;
+                break;
+            case 'rack3':
+                humidity1 = data.items[0].readings[2].value;
+                el.textContent += humidity1;
+                break;
+            case 'rack4':
+                humidity1 = data.items[0].readings[3].value;
+                el.textContent += humidity1;
+                break;
+            
+            default:
+                break;
+        }
     })
     .catch(error => console.log(error));

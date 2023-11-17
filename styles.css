@@ -5,24 +5,12 @@ body{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
-body svg{
-    display: inline-block;
-    position: absolute;
-    top: 100; 
-    left: 100;
-}
-
 h1{
     text-align: center;
     color: aliceblue;
 }
 
-#tempRead{
-    color:rgb(0, 136, 255);
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-}
-   
-#humRead{
-    color:rgb(255, 136, 0);
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+h5{
+    text-align: center;
+    color: aliceblue;
 }
