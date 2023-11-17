@@ -37,7 +37,7 @@ controls.update();
 const geometry = new THREE.BoxGeometry( 1.05, 2, 1.6 );
 const material = new THREE.MeshBasicMaterial( { color: 0xf } );
 material.transparent = true;
-material.opacity = 0.7;
+material.opacity = 0;
 
 function createRack(name, x , y ,z){
     const geo = new THREE.Mesh( geometry, material );
@@ -134,30 +134,10 @@ fetch('https://api.data.gov.sg/v1/environment/air-temperature')
         return res.json();
     })
     .then(data => {
-        el.textContent += "T: \n";
+        el.textContent += "Temperature: \n";
         el.textContent += " ";
-        const temperature1 = 0;
-        switch(rack){
-            case 'rack1':
-                temperature1 = data.items[0].readings[0].value;
-                el.textContent += temperature1;
-                break;
-            case 'rack2':
-                temperature1 = data.items[0].readings[1].value;
-                el.textContent += temperature1;
-                break;
-            case 'rack3':
-                temperature1 = data.items[0].readings[2].value;
-                el.textContent += temperature1;
-                break;
-            case 'rack4':
-                temperature1 = data.items[0].readings[3].value;
-                el.textContent += temperature1;
-                break;
-            
-            default:
-                break;
-        }
+        const temperature1 =  data.items[0].readings[0].value;
+        el.textContent += temperature1;
     })
     .catch(error => console.log(error));
 
@@ -166,29 +146,9 @@ fetch('https://api.data.gov.sg/v1/environment/relative-humidity')
         return res.json();
     })
     .then(data => {
-        el.textContent += "H: \n";
+        el.textContent += "Humidity: \n";
         el.textContent += " ";
-        const humidity1 = 0;
-        switch(intersects[0].object.name){
-            case 'rack1':
-                humidity1 = data.items[0].readings[0].value;
-                el.textContent += humidity1;
-                break;
-            case 'rack2':
-                humidity1 = data.items[0].readings[1].value;
-                el.textContent += humidity1;;
-                break;
-            case 'rack3':
-                humidity1 = data.items[0].readings[2].value;
-                el.textContent += humidity1;
-                break;
-            case 'rack4':
-                humidity1 = data.items[0].readings[3].value;
-                el.textContent += humidity1;
-                break;
-            
-            default:
-                break;
-        }
+        const humidity1 = data.items[0].readings[0].value;
+        el.textContent += humidity1;
     })
     .catch(error => console.log(error));
