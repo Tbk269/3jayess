@@ -114,11 +114,11 @@ window.addEventListener('mousemove', function(event){
                 break;
             case 'rack3':
                 el.className = 'tooltip show';
-                reading.position.set(-1.5,0,0);
+                reading.position.set(-1,0,0);
                 break;
             case 'rack4':
                 el.className = 'tooltip show';
-                reading.position.set(-1.5,0,1.5);
+                reading.position.set(-1,0,1.5);
                 break;
             
             default:
