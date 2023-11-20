@@ -47,16 +47,16 @@ function createRack(name, x , y ,z){
     return geo;
 }
 
-const rack1 = createRack('rack1', -1.08 , 2.5 ,3.68);
+const rack1 = createRack('rack1', -1.08 , 2.75 ,3.68);
 scene.add(rack1);
 
-const rack2 = createRack('rack2', -1.08 , 2.5 ,5.25);
+const rack2 = createRack('rack2', -1.08 , 2.75 ,5.25);
 scene.add(rack2);
 
-const rack3 = createRack('rack3', -2 , 2.5 ,3.68);
+const rack3 = createRack('rack3', -2 , 2.75 ,3.68);
 scene.add(rack3);
 
-const rack4 = createRack('rack4', -2 , 2.5 ,5.25);
+const rack4 = createRack('rack4', -2 , 2.75 ,5.25);
 scene.add(rack4);
 
 const el = document.createElement('h5');
@@ -134,10 +134,11 @@ fetch('https://api.data.gov.sg/v1/environment/air-temperature')
         return res.json();
     })
     .then(data => {
-        el.textContent += "Temperature: \n";
+        el.textContent += "\nTemperature: \n";
         el.textContent += " ";
         const temperature1 =  data.items[0].readings[0].value;
         el.textContent += temperature1;
+        temperatureTooltip.textContent = `Temperature: ${temperature1}°C`;
     })
     .catch(error => console.log(error));
 
@@ -146,7 +147,7 @@ fetch('https://api.data.gov.sg/v1/environment/relative-humidity')
         return res.json();
     })
     .then(data => {
-        el.textContent += "Humidity: \n";
+        el.textContent += "\nHumidity: \n";
         el.textContent += " ";
         const humidity1 = data.items[0].readings[0].value;
         el.textContent += humidity1;
