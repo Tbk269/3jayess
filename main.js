@@ -37,7 +37,7 @@ controls.update();
 const geometry = new THREE.BoxGeometry( 1.05, 2, 1.6 );
 const material = new THREE.MeshBasicMaterial( { color: 0xf } );
 material.transparent = true;
-material.opacity = 0;
+material.opacity = 0.7;
 
 function createRack(name, x , y ,z){
     const geo = new THREE.Mesh( geometry, material );
@@ -47,16 +47,16 @@ function createRack(name, x , y ,z){
     return geo;
 }
 
-const rack1 = createRack('rack1', -1.08 , 2.75 ,3.68);
+const rack1 = createRack('rack1', -1.08 , 2.75 ,5.3);
 scene.add(rack1);
 
-const rack2 = createRack('rack2', -1.08 , 2.75 ,5.25);
+const rack2 = createRack('rack2', -1.08 , 2.75 ,7);
 scene.add(rack2);
 
-const rack3 = createRack('rack3', -2 , 2.75 ,3.68);
+const rack3 = createRack('rack3', -2 , 2.75 ,5.3);
 scene.add(rack3);
 
-const rack4 = createRack('rack4', -2 , 2.75 ,5.25);
+const rack4 = createRack('rack4', -2 , 2.75 ,7);
 scene.add(rack4);
 
 const el = document.createElement('h5');
