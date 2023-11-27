@@ -72,6 +72,9 @@ light.shadow.camera.far = 1000;
 light.castShadow = true;
 scene.add(light);
 
+var ambLight = new THREE.AmbientLight(0xd0e3f2);
+scene.add(ambLight);
+
 const loader = new GLTFLoader();
 loader.load( 'room/digitalTwinRoom.gltf', function ( gltf ) {
 	scene.add( gltf.scene );
