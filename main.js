@@ -139,7 +139,7 @@ fetch('https://api.data.gov.sg/v1/environment/air-temperature')
     .then(data => {
         el.textContent += "\nTemperature: \n";
         el.textContent += " ";
-        const temperature1 =  data.items[0].readings[0].value;
+        const temperature1 =  data.items[0].readings[3].value;
         el.textContent += temperature1;
         temperatureTooltip.textContent = `Temperature: ${temperature1}°C`;
     })
@@ -152,7 +152,7 @@ fetch('https://api.data.gov.sg/v1/environment/relative-humidity')
     .then(data => {
         el.textContent += "\nHumidity: \n";
         el.textContent += " ";
-        const humidity1 = data.items[0].readings[0].value;
+        const humidity1 = data.items[0].readings[3].value;
         el.textContent += humidity1;
     })
     .catch(error => console.log(error));
