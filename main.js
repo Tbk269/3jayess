@@ -47,16 +47,16 @@ function createRack(name, x , y ,z){
     return geo;
 }
 
-const rack1 = createRack('rack1', -1.08 , 2.75 ,5.3);
+const rack1 = createRack('rack1', -1.85 , 2.5 ,5.65);
 scene.add(rack1);
 
-const rack2 = createRack('rack2', -1.08 , 2.75 ,7);
+const rack2 = createRack('rack2', -1.85 , 2.5 ,7.25);
 scene.add(rack2);
 
-const rack3 = createRack('rack3', -2 , 2.75 ,5.3);
+const rack3 = createRack('rack3', -2.95 , 2.5 ,5.65);
 scene.add(rack3);
 
-const rack4 = createRack('rack4', -2 , 2.75 ,7);
+const rack4 = createRack('rack4', -2.95 , 2.5 ,7.25);
 scene.add(rack4);
 
 const el = document.createElement('h5');
